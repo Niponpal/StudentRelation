@@ -7,11 +7,15 @@ namespace StudentMs.Controllers
     public class StudentController : Controller
     {
         private readonly IStudentRepository _studentRepository;
-       
-        public StudentController(IStudentRepository studentRepository)
+        private readonly IDepartmentRepository _departmentRepository;
+
+
+        public StudentController(IStudentRepository studentRepository, IDepartmentRepository departmentRepository)
         {
             _studentRepository = studentRepository;
+            _departmentRepository = departmentRepository;
         }
+
         public async Task<IActionResult> Index()
         {
             var data = await _studentRepository.GetAllStudentsAsync();  
@@ -22,10 +26,12 @@ namespace StudentMs.Controllers
         {
             if (id == 0)
             {
+                ViewData["DepartmentId"] = _departmentRepository.Dropdown();
                 return View(new Student());
             }
             else
             {
+                ViewData["DepartmentId"] = _departmentRepository.Dropdown();
                 var data = await _studentRepository.GetStudentByIdAsync(id);
                 return View(data);
             }
