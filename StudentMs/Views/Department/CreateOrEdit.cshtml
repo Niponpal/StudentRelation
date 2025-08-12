@@ -1,0 +1,70 @@
+﻿@model Department
+
+
+<h2>Create Department</h2>
+
+<form asp-action="CreateOrEdit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Budget" class="form-label"></label>
+        <input asp-for="Budget" class="form-control" />
+        <span asp-validation-for="Budget" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="OfficeLocation" class="form-label"></label>
+        <input asp-for="OfficeLocation" class="form-control" />
+        <span asp-validation-for="OfficeLocation" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PhoneExtension" class="form-label"></label>
+        <input asp-for="PhoneExtension" class="form-control" />
+        <span asp-validation-for="PhoneExtension" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="HeadOfDepartment" class="form-label"></label>
+        <input asp-for="HeadOfDepartment" class="form-control" />
+        <span asp-validation-for="HeadOfDepartment" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EstablishedYear" class="form-label"></label>
+        <input asp-for="EstablishedYear" class="form-control" />
+        <span asp-validation-for="EstablishedYear" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NumberOfProfessors" class="form-label"></label>
+        <input asp-for="NumberOfProfessors" class="form-control" />
+        <span asp-validation-for="NumberOfProfessors" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="WebsiteUrl" class="form-label"></label>
+        <input asp-for="WebsiteUrl" class="form-control" />
+        <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="IsActive" class="form-check-input" />
+        <label asp-for="IsActive" class="form-check-label"></label>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

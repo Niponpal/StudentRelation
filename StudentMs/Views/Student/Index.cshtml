@@ -1,0 +1,49 @@
+﻿@model List<Student>
+
+<h2>Students</h2>
+
+<p>
+    <a asp-action="CreateOrEdit" class="btn btn-primary">Add New Student</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Enrollment Date</th>
+            <th>Phone Number</th>
+            <th>Date of Birth</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Region</th>
+            <th>Gender</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.Id</td>
+                <td>@student.Name</td>
+                <td>@student.Email</td>
+                <td>@student.EnrollmentDate.ToString("yyyy-MM-dd")</td>
+                <td>@student.PhoneNumber</td>
+                <td>@student.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                <td>@student.Address</td>
+                <td>@student.City</td>
+                <td>@student.Region</td>
+                <td>@student.Gender</td>
+                <td>@(student.IsActive ? "Yes" : "No")</td>
+                <td>
+                    <a asp-action="CreateOrEdit" asp-route-id="@student.Id" class="btn btn-info btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@student.Id" class="btn btn-secondary btn-sm">Details</a>
+                    <a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
