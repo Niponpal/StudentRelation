@@ -18,6 +18,14 @@ namespace StudentMs.Data
                 .HasForeignKey(s => s.DepartmentId);
 
             base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<Department>()
+          .HasMany(d => d.Courses)
+         .WithOne(c => c.Department)
+         .HasForeignKey(c => c.DepartmentId);
+
+            base.OnModelCreating(modelBuilder);
         }
 
 

@@ -12,7 +12,7 @@ using StudentMs.Data;
 namespace StudentMs.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250812174102_int")]
+    [Migration("20250812181639_int")]
     partial class @int
     {
         /// <inheritdoc />
@@ -40,6 +40,9 @@ namespace StudentMs.Migrations
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -62,6 +65,8 @@ namespace StudentMs.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Courses");
                 });
@@ -166,6 +171,17 @@ namespace StudentMs.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("StudentMs.Models.Course", b =>
+                {
+                    b.HasOne("StudentMs.Models.Department", "Department")
+                        .WithMany("Courses")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("StudentMs.Models.Student", b =>
                 {
                     b.HasOne("StudentMs.Models.Department", "Department")
@@ -179,6 +195,8 @@ namespace StudentMs.Migrations
 
             modelBuilder.Entity("StudentMs.Models.Department", b =>
                 {
+                    b.Navigation("Courses");
+
                     b.Navigation("Students");
                 });
 #pragma warning restore 612, 618

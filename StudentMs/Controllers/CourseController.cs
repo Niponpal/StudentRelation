@@ -7,10 +7,15 @@ namespace StudentMs.Controllers
     public class CourseController : Controller
     {
         private readonly ICourseRepository _courseRepository;
-        public CourseController(ICourseRepository courseRepository)
+
+        private readonly IDepartmentRepository _departmentRepository;
+     
+        public CourseController(ICourseRepository courseRepository, IDepartmentRepository departmentRepository)
         {
             _courseRepository = courseRepository;
+            _departmentRepository = departmentRepository;
         }
+
         public async Task<IActionResult> Index()
         {
             var data = await _courseRepository.GetAllCoursesAsync();
@@ -21,10 +26,12 @@ namespace StudentMs.Controllers
         {
             if (id == null)
             {
+                ViewData["DepartmentId"] = _departmentRepository.Dropdown();
                 return View(new Course());
             }
             else
             {
+                ViewData["DepartmentId"] = _departmentRepository.Dropdown();
                 var course = await _courseRepository.GetCourseByIdAsync(id.Value);
                 return View(course);
             }

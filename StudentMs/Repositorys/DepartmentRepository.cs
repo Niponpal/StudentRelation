@@ -42,6 +42,8 @@ namespace StudentMs.Repositorys
             return data;
         }
 
+     
+
         public async Task<IEnumerable<Department>> GetAllDepartmentsAsync()
         {
            var data = await _context.Departments.ToListAsync();
